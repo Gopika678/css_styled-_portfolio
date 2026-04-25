@@ -76,6 +76,7 @@ portfolio/
     └── contact-form.png
 ```
 
+
 ### style.css Table of Contents
 
 | Section | Lines | Description |
