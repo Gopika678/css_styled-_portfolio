@@ -1,0 +1,1744 @@
+/* ═══════════════════════════════════════════════════════════════
+   style.css — Gopika Portfolio
+   Week 2: Styled Portfolio Website
+   
+   TABLE OF CONTENTS
+   1.  CSS Custom Properties (Variables)
+   2.  CSS Reset & Base Styles
+   3.  Typography
+   4.  Utility Classes
+   5.  Navigation
+   6.  Hero Section
+   7.  About Section
+   8.  Skills Section
+   9.  Projects Section
+   10. Contact Section
+   11. Footer
+   12. Buttons
+   13. Animations & Transitions
+   14. Scroll Reveal
+   15. Media Queries (Responsive Design)
+═══════════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. CSS CUSTOM PROPERTIES (VARIABLES)
+   Using :root to define a global design token system.
+   Variables make it easy to maintain a consistent color scheme
+   and change the whole site's look by editing just a few lines.
+───────────────────────────────────────────────────────────── */
+:root {
+  /* Color Palette */
+  --color-bg:          #0b0e17;     /* Deep navy — main background   */
+  --color-surface:     #111827;     /* Slightly lighter surface cards */
+  --color-surface-2:   #1a2235;     /* Elevated cards / hovers        */
+  --color-border:      #1f2d42;     /* Subtle borders                 */
+  --color-primary:     #4f8ef7;     /* Bright blue — primary accent   */
+  --color-primary-glow:#4f8ef740;  /* Primary with transparency      */
+  --color-secondary:   #a78bfa;     /* Soft violet — secondary accent */
+  --color-accent:      #34d399;     /* Mint green — success / stat    */
+  --color-text:        #e2e8f0;     /* Light text                     */
+  --color-text-muted:  #8898aa;     /* Muted / secondary text         */
+  --color-white:       #ffffff;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Outfit', system-ui, sans-serif;
+
+  /* Spacing Scale */
+  --space-xs:    0.25rem;
+  --space-sm:    0.5rem;
+  --space-md:    1rem;
+  --space-lg:    1.5rem;
+  --space-xl:    2.5rem;
+  --space-2xl:   4rem;
+  --space-3xl:   6rem;
+
+  /* Border Radius */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card:    0 4px 24px rgba(0,0,0,0.35);
+  --shadow-hover:   0 12px 40px rgba(79,142,247,0.18);
+  --shadow-glow:    0 0 40px rgba(79,142,247,0.15);
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+
+  /* Container */
+  --container-max:  1180px;
+  --container-pad:  clamp(1rem, 5vw, 3rem);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   2. CSS RESET & BASE STYLES
+   The universal selector (*) resets all elements so browsers
+   render consistently. box-sizing: border-box ensures padding
+   is included inside element width calculations.
+───────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;            /* Smooth scrolling for anchor links */
+  scroll-padding-top: 70px;           /* Offset for fixed navbar           */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Remove list bullets by default when inside nav */
+ul {
+  list-style: none;
+}
+
+/* Make images responsive by default */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Inherit font for form elements (browsers don't do this by default) */
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. TYPOGRAPHY
+   Using the CSS custom properties defined above.
+   Playfair Display for display headings, Outfit for body text.
+───────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+}
+
+p {
+  color: var(--color-text-muted);
+  max-width: 65ch;                    /* Optimal reading line length */
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+a:hover {
+  color: var(--color-white);
+}
+
+strong {
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.accent {
+  color: var(--color-primary);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. UTILITY CLASSES
+   Reusable building blocks used throughout the page.
+───────────────────────────────────────────────────────────── */
+
+/* Container: centers content and applies consistent padding */
+.container {
+  max-width: var(--container-max);
+  margin-inline: auto;                /* margin: 0 auto — centers the box */
+  padding-inline: var(--container-pad);
+}
+
+/* Section base: consistent vertical breathing room */
+.section {
+  padding-block: var(--space-3xl);    /* padding-top + padding-bottom    */
+}
+
+/* Section labels (small eyebrow text above headings) */
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* Section main headings */
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-bottom: var(--space-xl);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. BUTTONS
+   Multiple selector types demonstrated:
+   - Class selector (.btn)
+   - Descendant + class (.btn.btn-primary)
+   - Pseudo-class (:hover, :focus, :active)
+───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color var(--transition-base),
+    border-color     var(--transition-base),
+    color            var(--transition-base),
+    transform        var(--transition-base),
+    box-shadow       var(--transition-base);
+  white-space: nowrap;
+}
+
+/* Primary button — filled blue */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  border-color: var(--color-primary);
+}
+
+/* Primary button HOVER effect */
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--color-primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Active state — pressed */
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+/* Ghost button — outlined */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+/* Ghost button HOVER effect */
+.btn-ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-3px);
+}
+
+/* Full-width button modifier */
+.btn-full {
+  width: 100%;
+  justify-content: center;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. NAVIGATION
+   CSS selectors used:
+   - Element selector (nav)
+   - Class selectors (.navbar, .nav-logo, .nav-links)
+   - Descendant selectors (.nav-links a)
+   - Pseudo-class selectors (.nav-links a:hover)
+───────────────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem var(--container-pad);
+  background-color: rgba(11, 14, 23, 0.85);
+  backdrop-filter: blur(16px);         /* Frosted glass effect   */
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-border);
+  animation: slideDownFade 0.6s ease both;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--color-white);
+  text-decoration: none;
+  letter-spacing: -0.04em;
+  transition: color var(--transition-base);
+}
+
+.nav-logo:hover {
+  color: var(--color-primary);
+}
+
+/* Navigation links (ul > li > a pattern) */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+/* Descendant selector: targets <a> inside .nav-links */
+.nav-links a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+  transition: color var(--transition-base);
+}
+
+/* Underline effect using ::after pseudo-element */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-base);
+}
+
+/* Hover state — combined selector */
+.nav-links a:hover {
+  color: var(--color-white);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hamburger button (mobile) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: var(--radius-full);
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+/* Hamburger animation when active */
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. HERO SECTION
+───────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  padding: calc(70px + 4rem) var(--container-pad) 4rem;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  position: relative;
+}
+
+/* Subtle grid background pattern using CSS */
+.hero-bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(79,142,247,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,142,247,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 560px;
+  animation: fadeSlideUp 0.8s 0.2s ease both;
+}
+
+.hero-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: var(--color-primary);
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: var(--space-lg);
+  color: var(--color-white);
+}
+
+.hero-title-accent {
+  /* CSS gradient text technique */
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xl);
+  max-width: 46ch;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-xl);
+}
+
+/* Stats row below CTA */
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+/* Hero visual (right side) */
+.hero-visual {
+  flex-shrink: 0;
+  position: relative;
+  width: 340px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeSlideUp 0.8s 0.4s ease both;
+}
+
+/* Rotating ring around avatar */
+.avatar-ring {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-accent),
+    var(--color-primary)
+  );
+  padding: 3px;
+  animation: spin 8s linear infinite;
+}
+
+.avatar-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--color-surface);  /* shows only before photo is added */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Once a photo is uploaded, clear the background entirely */
+.avatar-inner:has(.photo-upload-zone.has-photo) {
+  background: none;
+}
+
+/* Fallback when no real photo is provided */
+.avatar-placeholder {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--color-text-muted);
+  letter-spacing: -0.05em;
+}
+
+/* Floating tech badges */
+.floating-badge {
+  position: absolute;
+  padding: 0.4rem 0.9rem;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+  animation: float 3s ease-in-out infinite;
+}
+
+.badge-html { top: 20px;   right: 0;   animation-delay: 0s;    color: #e44d26; border-color: #e44d2640; }
+.badge-css  { bottom: 60px; left: 0;   animation-delay: 1s;    color: #264de4; border-color: #264de440; }
+.badge-js   { bottom: 20px; right: 20px; animation-delay: 2s;  color: #f7df1e; border-color: #f7df1e40; }
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. ABOUT SECTION
+───────────────────────────────────────────────────────────── */
+.about-section {
+  background-color: var(--color-surface);
+}
+
+/* CSS Grid for two-column layout */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+.about-frame {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: visible;
+}
+
+.about-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--color-surface-2);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-size: 3rem;
+  color: var(--color-text-muted);
+}
+
+.about-img-placeholder small {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+
+/* Decorative corner accent */
+.about-frame-deco {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  width: 80px;
+  height: 80px;
+  background: var(--color-primary);
+  border-radius: var(--radius-sm);
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.about-body {
+  margin-bottom: var(--space-md);
+  font-size: 1rem;
+}
+
+/* Facts grid using CSS Grid */
+.about-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.fact-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+/* Hover effect on fact cards */
+.fact-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.fact-icon { font-size: 1.3rem; }
+
+.fact-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+
+.fact-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. SKILLS SECTION
+───────────────────────────────────────────────────────────── */
+.skills-section {
+  background-color: var(--color-bg);
+}
+
+/* CSS Grid — auto-fill creates responsive columns without media queries */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+}
+
+.skill-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+/* Top border highlight that reveals on hover */
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
+}
+
+/* Hover state on skill cards — multiple properties animated */
+.skill-card:hover {
+  border-color: var(--color-primary-glow);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.skill-card:hover::before {
+  transform: scaleX(1);
+}
+
+.skill-card-icon {
+  font-size: 2.2rem;
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
+.skill-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  color: var(--color-white);
+}
+
+.skill-card-desc {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+  max-width: none;
+}
+
+/* Skill progress bars */
+.skill-bar-wrap {
+  margin-bottom: var(--space-lg);
+}
+
+.skill-bar-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.skill-percent {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.skill-bar-track {
+  width: 100%;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+/* CSS custom property --fill controls width — set inline on each element */
+.skill-bar-fill {
+  height: 100%;
+  width: var(--fill);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  border-radius: var(--radius-full);
+  transition: width 1.2s ease;
+}
+
+/* Skill tags */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  list-style: none;
+}
+
+.skill-tags li {
+  padding: 0.2rem 0.7rem;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+/* Child selector: <li> inside .skill-card:hover */
+.skill-card:hover .skill-tags li {
+  color: var(--color-text);
+  border-color: var(--color-primary-glow);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. PROJECTS SECTION
+───────────────────────────────────────────────────────────── */
+.projects-section {
+  background-color: var(--color-surface);
+}
+
+/* CSS Grid — 2 columns on desktop */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.project-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.project-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Project thumbnail with overlay */
+.project-thumb {
+  position: relative;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Different background colors for each card using descendant selectors */
+.project-thumb-1 { background: linear-gradient(135deg, #0d2137, #1a3a5c); }
+.project-thumb-2 { background: linear-gradient(135deg, #1a1a2e, #2d1b69); }
+.project-thumb-3 { background: linear-gradient(135deg, #0d2015, #1a4a2e); }
+.project-thumb-4 { background: linear-gradient(135deg, #2e1515, #4a2a1a); }
+
+.project-thumb-placeholder {
+  font-size: 4rem;
+  z-index: 1;
+  transition: transform var(--transition-slow);
+}
+
+.project-card:hover .project-thumb-placeholder {
+  transform: scale(1.1);
+}
+
+/* Overlay that appears on hover */
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 14, 23, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-view-btn {
+  padding: 0.6rem 1.5rem;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(8px);
+  transition: transform var(--transition-base), background var(--transition-base);
+}
+
+.project-card:hover .project-view-btn {
+  transform: translateY(0);
+}
+
+.project-view-btn:hover {
+  background: var(--color-white);
+  color: var(--color-bg);
+}
+
+.project-body {
+  padding: var(--space-lg);
+}
+
+/* Project tags (small pills) */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.ptag {
+  padding: 0.2rem 0.65rem;
+  background: var(--color-primary-glow);
+  border: 1px solid rgba(79,142,247,0.3);
+  border-radius: var(--radius-full);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.06em;
+}
+
+.project-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+  max-width: none;
+}
+
+/* Project link buttons */
+.project-links {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.plink {
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid;
+  transition: all var(--transition-base);
+}
+
+.plink-primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.plink-primary:hover {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.plink-ghost {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.plink-ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. CONTACT SECTION
+───────────────────────────────────────────────────────────── */
+.contact-section {
+  background-color: var(--color-bg);
+}
+
+/* CSS Grid — two columns */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+.contact-intro {
+  font-size: 1rem;
+  margin-bottom: var(--space-xl);
+  max-width: 40ch;
+}
+
+.contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.contact-icon-wrap {
+  width: 48px;
+  height: 48px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  transition: border-color var(--transition-base), background var(--transition-base);
+}
+
+.contact-info-item:hover .contact-icon-wrap {
+  border-color: var(--color-primary);
+  background: var(--color-primary-glow);
+}
+
+.ci-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+
+.ci-value {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+a.ci-value:hover {
+  color: var(--color-primary);
+}
+
+/* Contact Form */
+.contact-form {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+/* Label styling */
+label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.required {
+  color: var(--color-primary);
+}
+
+/* Input, textarea, select — element selectors */
+input,
+textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: 0.92rem;
+  font-weight: 300;
+  outline: none;
+  appearance: none;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #3a4a5c;
+}
+
+/* Focus state — :focus pseudo-class */
+input:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+}
+
+/* Error state added via JavaScript */
+input.input-error,
+textarea.input-error {
+  border-color: #f87171;
+  box-shadow: 0 0 0 3px rgba(248,113,113,0.15);
+}
+
+.field-error {
+  display: block;
+  font-size: 0.75rem;
+  color: #f87171;
+  margin-top: var(--space-xs);
+  min-height: 1em;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+/* Form success message */
+.form-success {
+  display: none;
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  color: var(--color-accent);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   12. FOOTER
+───────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-xl);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--color-white);
+  letter-spacing: -0.04em;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  max-width: none;
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.footer-links a {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   13. ANIMATIONS & KEYFRAMES
+   @keyframes define the animation steps.
+   animation property applies them.
+───────────────────────────────────────────────────────────── */
+
+/* Page load: slide down for navbar */
+@keyframes slideDownFade {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+/* Page load: fade + slide up for hero content */
+@keyframes fadeSlideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Continuous spin for avatar ring */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Floating effect for tech badges */
+@keyframes float {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-8px); }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   14. SCROLL REVEAL
+   Elements start invisible and animate in when they enter
+   the viewport. JavaScript adds the .visible class.
+───────────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity  0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   15. MEDIA QUERIES — RESPONSIVE DESIGN
+   
+   Mobile-first approach using max-width breakpoints:
+   - 1024px: Tablet landscape
+   - 768px:  Tablet portrait
+   - 640px:  Large mobile
+   - 480px:  Small mobile
+   
+   @media rules override desktop styles at smaller screens.
+───────────────────────────────────────────────────────────── */
+
+/* ── Tablet Landscape (≤ 1024px) ── */
+@media (max-width: 1024px) {
+  .hero {
+    padding-top: calc(70px + 3rem);
+  }
+
+  .about-grid {
+    gap: var(--space-xl);
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .contact-intro {
+    max-width: 100%;
+  }
+
+  .contact-info-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .contact-info-item {
+    flex: 1;
+    min-width: 200px;
+  }
+}
+
+/* ── Tablet Portrait (≤ 768px) ── */
+@media (max-width: 768px) {
+  /* Reset section padding on smaller screens */
+  .section {
+    padding-block: var(--space-2xl);
+  }
+
+  /* Hamburger visible, nav-links hidden by default */
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-slow), padding var(--transition-slow);
+  }
+
+  /* JavaScript adds .open class to show the menu */
+  .nav-links.open {
+    max-height: 300px;
+    padding: var(--space-md) 0;
+  }
+
+  .nav-links li {
+    width: 100%;
+    padding: 0 var(--container-pad);
+  }
+
+  .nav-links a {
+    display: block;
+    padding-block: var(--space-sm);
+  }
+
+  /* Hero becomes single column on tablet */
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    min-height: auto;
+    padding-top: calc(70px + 2rem);
+    padding-bottom: 3rem;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-eyebrow,
+  .hero-eyebrow::before {
+    justify-content: center;
+  }
+
+  .hero-subtitle {
+    margin-inline: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    width: 240px;
+    height: 240px;
+  }
+
+  .avatar-ring {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* About section stacks vertically */
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-image-col {
+    max-width: 300px;
+    margin-inline: auto;
+  }
+
+  /* Projects: single column */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Form: single column */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer stacks vertically */
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-sm);
+  }
+}
+
+/* ── Large Mobile (≤ 640px) ── */
+@media (max-width: 640px) {
+  :root {
+    --space-3xl: 4rem;
+    --space-2xl: 3rem;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .about-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  .contact-info-list {
+    flex-direction: column;
+  }
+}
+
+/* ── Small Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    width: 180px;
+    height: 180px;
+  }
+
+  .avatar-ring {
+    width: 160px;
+    height: 160px;
+  }
+
+  .floating-badge {
+    display: none;           /* Hide badges on very small screens */
+  }
+
+  .contact-form {
+    padding: var(--space-md);
+  }
+
+  .project-links {
+    flex-direction: column;
+  }
+
+  .plink {
+    text-align: center;
+  }
+}
+
+/* ── Print styles ── */
+@media print {
+  .navbar,
+  .hero-visual,
+  .floating-badge,
+  .btn,
+  .contact-form {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PHOTO UPLOAD ZONES
+   Styles for the interactive click-to-upload photo areas
+   in the Hero (profile) and About sections.
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Shared upload zone base ─────────────────────────── */
+.photo-upload-zone {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background var(--transition-base);
+}
+
+/* Hidden file input — triggered by clicking the zone */
+.photo-upload-zone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+  /* Override the base input styles for this special case */
+  border: none;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* Uploaded image fills the zone */
+.photo-upload-zone img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 1;
+  transition: transform var(--transition-slow);
+}
+
+/* Subtle zoom on hover once photo is added */
+.photo-upload-zone.has-photo:hover img {
+  transform: scale(1.04);
+}
+
+/* ── Upload hint (shown before a photo is chosen) ────── */
+.photo-upload-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-align: center;
+  z-index: 3;
+  pointer-events: none;
+  padding: 1rem;
+  transition: opacity var(--transition-base);
+}
+
+.upload-icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.upload-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+}
+
+.upload-sub {
+  font-size: 0.65rem;
+  color: #3a4a5c;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Drag-over state ─────────────────────────────────── */
+.photo-upload-zone.drag-over {
+  outline: 2px dashed var(--color-primary);
+  outline-offset: -4px;
+  background: var(--color-primary-glow) !important;
+}
+
+.photo-upload-zone.drag-over .photo-upload-hint {
+  opacity: 0.6;
+}
+
+/* ── Hover shimmer on empty zone ─────────────────────── */
+.photo-upload-zone:not(.has-photo):hover .upload-icon {
+  transform: scale(1.2);
+  transition: transform var(--transition-base);
+}
+
+.photo-upload-zone:not(.has-photo):hover .upload-text {
+  color: var(--color-primary);
+}
+
+/* ── Overlay on hover once photo is loaded ───────────── */
+.photo-upload-zone.has-photo::after {
+  content: '✏️ Change';
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 14, 23, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-white);
+  letter-spacing: 0.08em;
+  opacity: 0;
+  z-index: 4;
+  transition: opacity var(--transition-base);
+}
+
+.photo-upload-zone.has-photo:hover::after {
+  opacity: 1;
+}
+
+/* ── Hero / Profile photo specifics ──────────────────── */
+#profileUpload {
+  border-radius: 50%;
+  background: transparent;
+}
+
+#profileUpload:not(.has-photo) {
+  border: 2px dashed var(--color-border);
+  background: var(--color-surface-2);
+}
+
+#profileUpload:not(.has-photo):hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-glow);
+}
+
+/* Once photo loaded — no background, pure photo */
+#profileUpload.has-photo {
+  background: none;
+  border: none;
+}
+
+#profileUpload.has-photo img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Edit button floating below the avatar ring */
+.photo-edit-btn {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--transition-base), color var(--transition-base), background var(--transition-base);
+  z-index: 10;
+  font-family: var(--font-body);
+}
+
+.photo-edit-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-surface-2);
+}
+
+/* ── About photo specifics ───────────────────────────── */
+.about-upload-zone {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--color-surface-2);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-base), background var(--transition-base);
+}
+
+.about-upload-zone:not(.has-photo):hover {
+  border-color: var(--color-primary);
+  background: rgba(79, 142, 247, 0.05);
+}
+
+.about-upload-zone.has-photo {
+  border-style: solid;
+  border-color: var(--color-border);
+}
+
+.about-upload-zone .upload-icon { font-size: 2.5rem; }
+.about-upload-zone .upload-text { font-size: 0.88rem; }
+
+/* Change / Remove bar below the about image */
+.photo-change-bar {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  justify-content: center;
+}
+
+.photo-change-btn,
+.photo-remove-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: 1.5px solid;
+  transition: all var(--transition-base);
+}
+
+.photo-change-btn {
+  background: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.photo-change-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.photo-remove-btn {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.photo-remove-btn:hover {
+  border-color: #f87171;
+  color: #f87171;
+}

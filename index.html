@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gopika P — Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ───────────────────────────────── -->
+  <nav class="navbar">
+    <a href="#home" class="nav-logo">Gopika<span class="accent">.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────── -->
+  <header id="home" class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Web Developer &amp; Designer</p>
+      <h1 class="hero-title">
+        Crafting Digital<br>
+        <span class="hero-title-accent">Experiences</span>
+      </h1>
+      <p class="hero-subtitle">
+        Hi, I'm <strong>Gopika</strong> — a front-end developer passionate about
+        building beautiful, functional websites from scratch.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact"  class="btn btn-ghost">Let's Talk →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">5+</span><span class="stat-label">Projects</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">1</span><span class="stat-label">Year Learning</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Curiosity</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="avatar-ring">
+        <div class="avatar-inner">
+          <div class="avatar-placeholder">GP</div>
+        </div>
+      </div>
+     
+    </div>
+  </header>
+
+  <!-- About-->
+  <section id="about" class="section about-section">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-image-col reveal">
+          <div class="about-frame">
+            <!-- PHOTO UPLOAD: click to add your about/workspace photo -->
+            <div class="photo-upload-zone about-upload-zone" id="aboutUpload" title="Click to upload your about photo">
+              <img id="aboutImg" src="" alt="Alex working at desk" style="display:none;" />
+              <div class="photo-upload-hint" id="aboutHint">
+                <span class="upload-icon">🖼️</span>
+                <span class="upload-text">Click to add<br>your photo</span>
+                <span class="upload-sub">JPG, PNG, WEBP</span>
+              </div>
+              <input type="file" id="aboutInput" accept="image/*" aria-label="Upload about photo" />
+            </div>
+            <div class="photo-change-bar" id="aboutChangeBar" style="display:none;">
+              <button class="photo-change-btn" id="aboutEditBtn">✏️ Change Photo</button>
+              <button class="photo-remove-btn" id="aboutRemoveBtn">✕ Remove</button>
+            </div>
+            <div class="about-frame-deco"></div>
+          </div>
+        </div>
+
+        <div class="about-text-col reveal">
+          <p class="section-eyebrow">Who I Am</p>
+          <h2 class="section-title">A Developer Who Loves the Craft</h2>
+          <p class="about-body">
+            I'm a web development student diving deep into the world of HTML, CSS, and JavaScript.
+            What started as curiosity quickly became a passion — I love the moment a design comes alive in a browser.
+          </p>
+          <p class="about-body">
+            I approach every project with attention to detail, clean code, and a user-first mindset.
+            Good design and good code are two sides of the same coin.
+          </p>
+
+          <div class="about-facts">
+            <div class="fact-card">
+              <span class="fact-icon">📍</span>
+              <div>
+                <div class="fact-label">Location</div>
+                <div class="fact-value">Palakkad, Kerala</div>
+              </div>
+            </div>
+            <div class="fact-card">
+              <span class="fact-icon">🎯</span>
+              <div>
+                <div class="fact-label">Focus</div>
+                <div class="fact-value">Front-End Dev</div>
+              </div>
+            </div>
+            <div class="fact-card">
+              <span class="fact-icon">📚</span>
+              <div>
+                <div class="fact-label">Education</div>
+                <div class="fact-value">Self-Taught</div>
+              </div>
+            </div>
+            <div class="fact-card">
+              <span class="fact-icon">✅</span>
+              <div>
+                <div class="fact-label">Available</div>
+                <div class="fact-value">For Projects</div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#contact" class="btn btn-primary">Hire Me</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Skills ─────────────────────────────────────── -->
+  <section id="skills" class="section skills-section">
+    <div class="container">
+      <p class="section-eyebrow reveal">What I Know</p>
+      <h2 class="section-title reveal">Skills &amp; Technologies</h2>
+
+      <div class="skills-grid">
+
+        <!-- Skill Card 1 -->
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">🌐</div>
+          <h3 class="skill-card-title">HTML5</h3>
+          <p class="skill-card-desc">Semantic markup, document structure, forms, accessibility, and SEO-friendly HTML.</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label-row">
+              <span>Proficiency</span><span class="skill-percent">90%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="--fill: 90%"></div>
+            </div>
+          </div>
+          <ul class="skill-tags">
+            <li>Semantic Tags</li><li>Forms</li><li>SEO</li><li>Accessibility</li>
+          </ul>
+        </div>
+
+        <!-- Skill Card 2 -->
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">🎨</div>
+          <h3 class="skill-card-title">CSS3</h3>
+          <p class="skill-card-desc">Flexbox, Grid, animations, responsive design, custom properties, and modern selectors.</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label-row">
+              <span>Proficiency</span><span class="skill-percent">80%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="--fill: 80%"></div>
+            </div>
+          </div>
+          <ul class="skill-tags">
+            <li>Flexbox</li><li>Grid</li><li>Animations</li><li>Variables</li>
+          </ul>
+        </div>
+
+        <!-- Skill Card 3 -->
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">⚡</div>
+          <h3 class="skill-card-title">JavaScript</h3>
+          <p class="skill-card-desc">DOM manipulation, event handling, form validation, and interactive UI behaviour.</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label-row">
+              <span>Proficiency</span><span class="skill-percent">55%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="--fill: 55%"></div>
+            </div>
+          </div>
+          <ul class="skill-tags">
+            <li>DOM</li><li>Events</li><li>Validation</li><li>ES6</li>
+          </ul>
+        </div>
+
+        <!-- Skill Card 4 -->
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">🛠️</div>
+          <h3 class="skill-card-title">Tools</h3>
+          <p class="skill-card-desc">Development tools that keep my workflow smooth, organized, and professional.</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label-row">
+              <span>Proficiency</span><span class="skill-percent">70%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="--fill: 70%"></div>
+            </div>
+          </div>
+          <ul class="skill-tags">
+            <li>VS Code</li><li>Git</li><li>DevTools</li><li>GitHub</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projects ─────────────────────────────────── -->
+  <section id="projects" class="section projects-section">
+    <div class="container">
+      <p class="section-eyebrow reveal">My Work</p>
+      <h2 class="section-title reveal">Featured Projects</h2>
+
+      <div class="projects-grid">
+
+        <article class="project-card reveal">
+          <div class="project-thumb project-thumb-1">
+            <!-- <img src="images/screenshots/project1.png" alt="Portfolio Screenshot"> -->
+            <div class="project-thumb-placeholder">🌿</div>
+            <div class="project-overlay">
+              <a href="#" class="project-view-btn">View Project ↗</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="ptag">HTML5</span>
+              <span class="ptag">CSS3</span>
+            </div>
+            <h3 class="project-name">Personal Portfolio</h3>
+            <p class="project-desc">A multi-section responsive portfolio website built with semantic HTML and custom CSS. Features smooth scrolling and hover animations.</p>
+            <div class="project-links">
+              <a href="#" class="plink plink-primary">Live Demo</a>
+              <a href="#" class="plink plink-ghost">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-thumb project-thumb-2">
+            <div class="project-thumb-placeholder">📋</div>
+            <div class="project-overlay">
+              <a href="#" class="project-view-btn">View Project ↗</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="ptag">HTML Forms</span>
+              <span class="ptag">Validation</span>
+            </div>
+            <h3 class="project-name">Smart Contact Form</h3>
+            <p class="project-desc">A fully styled and validated HTML form using email type, required fields, and JavaScript validation with user-friendly error messages.</p>
+            <div class="project-links">
+              <a href="#" class="plink plink-primary">Live Demo</a>
+              <a href="#" class="plink plink-ghost">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-thumb project-thumb-3">
+            <div class="project-thumb-placeholder">🖼️</div>
+            <div class="project-overlay">
+              <a href="#" class="project-view-btn">View Project ↗</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="ptag">CSS Grid</span>
+              <span class="ptag">Responsive</span>
+            </div>
+            <h3 class="project-name">Photo Gallery</h3>
+            <p class="project-desc">A CSS Grid-powered responsive image gallery with hover zoom effects, semantic figure elements, and descriptive alt text.</p>
+            <div class="project-links">
+              <a href="#" class="plink plink-primary">Live Demo</a>
+              <a href="#" class="plink plink-ghost">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-thumb project-thumb-4">
+            <div class="project-thumb-placeholder">📰</div>
+            <div class="project-overlay">
+              <a href="#" class="project-view-btn">View Project ↗</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="ptag">Flexbox</span>
+              <span class="ptag">Typography</span>
+            </div>
+            <h3 class="project-name">Blog Layout</h3>
+            <p class="project-desc">A clean blog page layout using Flexbox for multi-column design, Google Fonts, and responsive card components.</p>
+            <div class="project-links">
+              <a href="#" class="plink plink-primary">Live Demo</a>
+              <a href="#" class="plink plink-ghost">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ───────────────────────────────────── -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="contact-left reveal">
+          <p class="section-eyebrow">Get In Touch</p>
+          <h2 class="section-title">Let's Build Something Together</h2>
+          <p class="contact-intro">
+            Have a project in mind? Want to collaborate, or just say hello?
+            My inbox is always open.
+          </p>
+
+          <div class="contact-info-list">
+            <div class="contact-info-item">
+              <div class="contact-icon-wrap">📧</div>
+              <div>
+                <div class="ci-label">Email</div>
+                <a href="mailto:gopika@example.com" class="ci-value">gopika@example.com</a>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-icon-wrap">📍</div>
+              <div>
+                <div class="ci-label">Location</div>
+                <div class="ci-value">Palakkad, Kerala, India</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-icon-wrap">💼</div>
+              <div>
+                <div class="ci-label">GitHub</div>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="ci-value">github.com/gopika</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-right reveal">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" placeholder="" required minlength="2" />
+                <span class="field-error" id="nameError"></span>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="" required />
+                <span class="field-error" id="emailError"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Project inquiry..." />
+            </div>
+            <div class="form-group">
+              <label for="message">Message <span class="required">*</span></label>
+              <textarea id="message" name="message" placeholder="Tell me about your project..." required minlength="10"></textarea>
+              <span class="field-error" id="messageError"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Send Message →</button>
+            <div class="form-success" id="formSuccess">
+              ✅ Message sent! I'll get back to you within 24 hours.
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">Gopika<span class="accent">.</span></div>
+      <p class="footer-copy">
+        © 2026 Gopika P. Built with HTML5 &amp; CSS3 — No frameworks, just craft.
+      </p>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="#home">Back to Top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS: hamburger + scroll reveal + form + photo upload -->
+  <script>
+    // ── Hamburger toggle ──────────────────────────────
+    const ham = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    ham.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      ham.classList.toggle('active');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        ham.classList.remove('active');
+      });
+    });
+
+    // ── Scroll reveal ─────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // ── Form validation ───────────────────────────────
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      let valid = true;
+      const name    = document.getElementById('name');
+      const email   = document.getElementById('email');
+      const message = document.getElementById('message');
+      [name, email, message].forEach(field => {
+        field.classList.remove('input-error');
+        document.getElementById(field.id + 'Error').textContent = '';
+      });
+      if (name.value.trim().length < 2) {
+        name.classList.add('input-error');
+        document.getElementById('nameError').textContent = 'Please enter your name (at least 2 characters).';
+        valid = false;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.value.trim())) {
+        email.classList.add('input-error');
+        document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+        valid = false;
+      }
+      if (message.value.trim().length < 10) {
+        message.classList.add('input-error');
+        document.getElementById('messageError').textContent = 'Message must be at least 10 characters.';
+        valid = false;
+      }
+      if (valid) {
+        const success = document.getElementById('formSuccess');
+        success.style.display = 'block';
+        this.reset();
+        setTimeout(() => success.style.display = 'none', 5000);
+      }
+    });
+
+    // ── Photo Upload Helper ───────────────────────────
+    function setupPhotoUpload({ zoneId, inputId, imgId, hintId, editBtnId, removeBtnId, changeBarId }) {
+      const zone     = document.getElementById(zoneId);
+      const input    = document.getElementById(inputId);
+      const img      = document.getElementById(imgId);
+      const hint     = document.getElementById(hintId);
+      const editBtn  = editBtnId  ? document.getElementById(editBtnId)  : null;
+      const removeBtn= removeBtnId? document.getElementById(removeBtnId): null;
+      const changeBar= changeBarId? document.getElementById(changeBarId): null;
+
+      function showPhoto(src) {
+        img.src = src;
+        img.style.display = 'block';
+        hint.style.display = 'none';
+        zone.classList.add('has-photo');
+        if (editBtn)   editBtn.style.display   = 'inline-flex';
+        if (changeBar) changeBar.style.display = 'flex';
+      }
+
+      function clearPhoto() {
+        img.src = '';
+        img.style.display = 'none';
+        hint.style.display = 'flex';
+        zone.classList.remove('has-photo');
+        if (editBtn)   editBtn.style.display   = 'none';
+        if (changeBar) changeBar.style.display = 'none';
+        input.value = '';
+      }
+
+      // Click zone or edit button → open file picker
+      zone.addEventListener('click', () => input.click());
+      if (editBtn) editBtn.addEventListener('click', (e) => { e.stopPropagation(); input.click(); });
+
+      // Remove button
+      if (removeBtn) removeBtn.addEventListener('click', (e) => { e.stopPropagation(); clearPhoto(); });
+
+      // Drag & drop support
+      zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('drag-over'); });
+      zone.addEventListener('dragleave', ()  => zone.classList.remove('drag-over'));
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) loadFile(file);
+      });
+
+      // File input change
+      input.addEventListener('change', () => {
+        if (input.files[0]) loadFile(input.files[0]);
+      });
+
+      function loadFile(file) {
+        // Validate size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          alert('Image is too large. Please choose a file under 5MB.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => showPhoto(e.target.result);
+        reader.readAsDataURL(file);
+      }
+    }
+
+    
+
+    // ── About Photo ───────────────────────────────────
+    setupPhotoUpload({
+      zoneId:     'aboutUpload',
+      inputId:    'aboutInput',
+      imgId:      'aboutImg',
+      hintId:     'aboutHint',
+      changeBarId:'aboutChangeBar',
+      editBtnId:  'aboutEditBtn',
+      removeBtnId:'aboutRemoveBtn',
+    });
+  </script>
+</body>
+</html>
